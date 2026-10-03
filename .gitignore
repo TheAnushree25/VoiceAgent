@@ -1,0 +1,10 @@
+# Python's installed libraries and cache files (rebuilt any time)
+.venv/
+__pycache__/
+
+# Secrets: passwords and API keys never go into Git
+.env
+
+# Voice recordings and generated audio (large, and may contain people's voices)
+*.wav
+*.mp3
