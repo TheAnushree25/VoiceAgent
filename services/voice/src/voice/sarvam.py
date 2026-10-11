@@ -31,3 +31,21 @@ def speech_to_text(audio, sample_rate, language):
     )
     response.raise_for_status()
     return response.json()["transcript"]
+
+
+def text_to_speech(text, language):
+    """Turn text into natural speech with Sarvam's Bulbul voices. Returns MP3 bytes."""
+    response = httpx.post(
+        TEXT_TO_SPEECH_URL,
+        headers={"api-subscription-key": API_KEY},
+        json={
+            "text": text,
+            "language_code": f"{language}-IN",
+            "model": "bulbul:v3",
+            "speaker": SPEAKER,
+            "output_audio_codec": "mp3",
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
+    return base64.b64decode(response.json()["audios"][0])
